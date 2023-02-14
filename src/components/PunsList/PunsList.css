@@ -1,0 +1,25 @@
+.title {
+  text-align: center;
+}
+
+.info {
+  margin: 200px;
+  font-size: 22px;
+  font-weight: bolder;
+  color: dodgerblue;
+}
+
+.table {
+  width: 80vw;
+  text-align: center;
+}
+
+.table__head {
+  background-color: black;
+  color: white;
+}
+
+.table__data {
+  padding: 10px;
+  border-bottom: 1px solid rgb(195, 185, 185);
+}
