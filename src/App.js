@@ -4,10 +4,20 @@ import { Header } from "./components/Header/Header";
 import { PunsForm } from "./components/PunsForm/PunsForm";
 import { PunsList } from "./components/PunsList/PunsList";
 import { useInput } from "./hooks/useInput";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 import { puns } from "./puns/puns";
 
 function App() {
   const [formValues, setFormValues] = useState({});
+
+  const punInfo = {
+    date: '',
+    dev: '',
+    context: '',
+    pun: ''
+  }
+
+  const listedPuns = useLocalStorage('puns_list', punInfo)
 
   const {
     value: date,
@@ -46,7 +56,7 @@ function App() {
     };
 
     setFormValues(newPun);
-    console.log(newPun);
+    listedPuns.saveValue(newPun)
   };
 
   return (
