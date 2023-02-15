@@ -9,7 +9,7 @@ export const Puns = ({ pun }) => {
   return (
     <tr>
       <td className="table__data">{date}</td>
-      <td className="table__data" data-testid="vote-result">
+      <td className="table__data">
         {vote}
       </td>
       <td className="table__data">{author}</td>

@@ -1,8 +1,7 @@
 import "./PunsList.css";
-import { puns } from "../../puns/puns";
 import { Puns } from "../Puns/Puns";
 
-export const PunsList = () => {
+export const PunsList = ({puns}) => {
   return (
     <div>
       <h2 className="title">List of Puns</h2>

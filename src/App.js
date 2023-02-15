@@ -1,5 +1,6 @@
 import "./App.css";
 import { PunsList } from "./components/PunsList/PunsList";
+import { puns } from "./puns/puns";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           <p>RANKING</p>
         </nav>
       </header>
-      <PunsList />
+      <PunsList puns={puns} />
     </div>
   );
 }
