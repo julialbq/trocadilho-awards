@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { PunsList } from "./components/PunsList/PunsList";
+import { puns } from "./puns/puns";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header className="header">
+        <h1 className="header__title">Trocadilho Awards</h1>
+        <nav className="header__nav">
+          <p>LIST OF PUNS</p>
+          <p>ADD PUN</p>
+          <p>RANKING</p>
+        </nav>
       </header>
+      <PunsList puns={puns} />
     </div>
   );
 }
