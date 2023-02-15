@@ -1,59 +1,104 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { PunsList } from "./PunsList";
 
+const renderSetUp = () => {
+  const puns = [
+    {
+      id: 1,
+      author: "@jose",
+      date: "01/04/2022",
+      context: "conversation about puns",
+      message: "pun intended",
+      votes: 1,
+    },
+    {
+      id: 2,
+      author: "@maria",
+      date: "22/10/2022",
+      context: "conversation about puns",
+      message: "pun unintended",
+      votes: 5,
+    },
+  ];
+
+  return render(<PunsList puns={puns} />);
+};
+
 describe("<PunsList />", () => {
-  it("render table title", () => {
-    render(<PunsList />);
+  describe("it should render a table and its contents", () => {
+    it("renders table title", () => {
+      renderSetUp();
 
-    const tableTitle = screen.getByRole("heading", { name: /list of puns/i });
+      const tableTitle = screen.getByRole("heading", { name: /list of puns/i });
 
-    expect(tableTitle).toBeInTheDocument();
-  });
-
-  it("render table header row", () => {
-    render(<PunsList />);
-
-    const headerColumnTitle = screen.getByRole("row", {
-      name: /date votes author context pun vote for your favorite/i,
+      expect(tableTitle).toBeInTheDocument();
     });
 
-    expect(headerColumnTitle).toBeInTheDocument();
-  });
+    it("render stable header row", () => {
+      renderSetUp();
 
-  it("render table column header title", () => {
-    render(<PunsList />);
+      const headerColumnTitle = screen.getByRole("row", {
+        name: /date votes author context pun vote for your favorite/i,
+      });
 
-    const headerColumnTitle = screen.getByRole("columnheader", {
-      name: /author/i,
+      expect(headerColumnTitle).toBeInTheDocument();
     });
 
-    expect(headerColumnTitle).toBeInTheDocument();
-  });
+    it("renders table column header title", () => {
+      renderSetUp();
 
-  it("render vote button", () => {
-    render(<PunsList />);
+      const headerColumnTitle = screen.getByRole("columnheader", {
+        name: /author/i,
+      });
 
-    const voteButtons = screen.getAllByRole("button", {
-      name: /vote/i,
+      expect(headerColumnTitle).toBeInTheDocument();
     });
 
-    expect(voteButtons[0]).toBeInTheDocument();
+    it("renders vote button", () => {
+      renderSetUp();
+
+      const voteButtons = screen.getAllByRole("button", {
+        name: /vote/i,
+      });
+
+      expect(voteButtons[0]).toBeInTheDocument();
+    });
   });
 
-  it("calls onClick with correct result", () => {
-    render(<PunsList />);
+  describe("it should render the list of puns when available", () => {
+    it("should render in the table all puns available", () => {
+      const puns = [
+        {
+          id: 1,
+          author: "@jose",
+          date: "01/04/2022",
+          context: "conversation about puns",
+          message: "pun intended",
+          votes: 1,
+        },
+        {
+          id: 2,
+          author: "@maria",
+          date: "22/10/2022",
+          context: "conversation about puns",
+          message: "pun unintended",
+          votes: 5,
+        },
+      ];
+      render(<PunsList puns={puns} />);
 
-    const voteButtons = screen.getAllByRole("button", {
-      name: /vote/i,
+      const tableRows = screen.queryAllByRole("row");
+
+      expect(tableRows).toHaveLength(puns.length + 1);
     });
-    const votes = screen.getAllByTestId("vote-result");
 
-    const voteButton = voteButtons[0];
-    const vote = votes[0];
+    it("should render warning of empty list when puns are not available", () => {
+      const emptyPuns = [];
+      render(<PunsList puns={emptyPuns} />);
 
-    userEvent.click(voteButton);
+      const warningMessage = screen.getByText(/no puns available/i);
 
-    expect(vote).toHaveTextContent("2");
+      expect(warningMessage).toBeInTheDocument();
+    });
   });
 });
