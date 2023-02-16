@@ -38,10 +38,17 @@ function App() {
   } = useInput(formValues.dev ?? "");
 
   const {
-    value: pun,
-    setValue: setPun,
-    handleInput: handlePun,
-  } = useInput(formValues.pun ?? "");
+    value: message,
+    setValue: setMessage,
+    handleInput: handleMessage,
+  } = useInput(formValues.message ?? "");
+
+  const resetInputValues = () => {
+    setDate("");
+    setContext("");
+    setDev("");
+    setMessage("");
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -59,7 +66,7 @@ function App() {
     setFormValues(newPun);
     listedPuns.saveValue(newPun);
 
-    listedPuns.saveValue(newPun)
+    resetInputValues();
   };
 
   return (
