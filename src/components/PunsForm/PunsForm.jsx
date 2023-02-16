@@ -7,8 +7,8 @@ export const PunsForm = ({
   handleDev,
   context,
   handleContext,
-  pun,
-  handlePun,
+  message,
+  handleMessage,
   handleSubmit,
 }) => {
   return (
@@ -57,8 +57,8 @@ export const PunsForm = ({
             type="text"
             id="pun"
             required
-            value={pun}
-            onChange={handlePun}
+            value={message}
+            onChange={handleMessage}
           />
         </label>
         <button className="form__button" type="submit">
