@@ -8,6 +8,8 @@ import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
   const [formValues, setFormValues] = useState({});
+  const [listPage, setListPage] = useState(true);
+  const [addPage, setAddPage] = useState(false);
 
   const punInfo = {
     date: "",
@@ -71,8 +73,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
-      <PunsList puns={puns} />
+      <Header setListPage={setListPage} setAddPage={setAddPage} />
+      {listPage && <PunsList puns={listedPuns.parsed} />}
+      {addPage && (
         <PunsForm
           date={date}
           handleDate={handleDate}
