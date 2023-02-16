@@ -5,7 +5,7 @@ export const PunsList = ({puns}) => {
   return (
     <div>
       <h2 className="title">List of Puns</h2>
-      {puns.length > 0 ? (
+      {puns ? (
         <table className="table">
           <thead className="table__head">
             <tr>
@@ -18,8 +18,8 @@ export const PunsList = ({puns}) => {
             </tr>
           </thead>
           <tbody>
-            {puns.map((pun) => (
-              <Puns key={pun.id} pun={pun} />
+            {puns?.map((pun) => (
+              <Puns key={pun.message} pun={pun} />
             ))}
           </tbody>
         </table>

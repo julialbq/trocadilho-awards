@@ -5,19 +5,19 @@ import { PunsForm } from "./components/PunsForm/PunsForm";
 import { PunsList } from "./components/PunsList/PunsList";
 import { useInput } from "./hooks/useInput";
 import { useLocalStorage } from "./hooks/useLocalStorage";
-import { puns } from "./puns/puns";
 
 function App() {
   const [formValues, setFormValues] = useState({});
 
   const punInfo = {
-    date: '',
-    dev: '',
-    context: '',
-    pun: ''
-  }
+    date: "",
+    dev: "",
+    context: "",
+    message: "",
+    votes: 0,
+  };
 
-  const listedPuns = useLocalStorage('puns_list', punInfo)
+  const listedPuns = useLocalStorage("puns_list", punInfo);
 
   const {
     value: date,
@@ -44,7 +44,7 @@ function App() {
   } = useInput(formValues.pun ?? "");
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     const elements = event.target.elements;
 
@@ -52,10 +52,13 @@ function App() {
       date: elements.date.value,
       dev: elements.dev.value,
       context: elements.dev.value,
-      pun: elements.pun.value,
+      message: elements.pun.value,
+      votes: 0,
     };
 
     setFormValues(newPun);
+    listedPuns.saveValue(newPun);
+
     listedPuns.saveValue(newPun)
   };
 
@@ -63,17 +66,18 @@ function App() {
     <div className="App">
       <Header />
       <PunsList puns={puns} />
-      <PunsForm
-        date={date}
-        handleDate={handleDate}
-        dev={dev}
-        handleDev={handleDev}
-        context={context}
-        handleContext={handleContext}
-        pun={pun}
-        handlePun={handlePun}
-        handleSubmit={handleSubmit}
-      />
+        <PunsForm
+          date={date}
+          handleDate={handleDate}
+          dev={dev}
+          handleDev={handleDev}
+          context={context}
+          handleContext={handleContext}
+          message={message}
+          handleMessage={handleMessage}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 }
