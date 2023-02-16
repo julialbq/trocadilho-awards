@@ -14,7 +14,7 @@ export const PunsForm = ({
   return (
     <div className="form__wrapper">
       <form className="form" onSubmit={handleSubmit}>
-        <h2 className="title">Add New Pun</h2>
+        <h2 className="form__title">Add New Pun</h2>
         <div className="form__division">
           <label className="form__label" name="date">
             Date:
@@ -61,9 +61,11 @@ export const PunsForm = ({
             onChange={handleMessage}
           />
         </label>
-        <button className="form__button" type="submit">
-          Add Pun
-        </button>
+        <div className="button__wrapper">
+          <button className="form__button" type="submit">
+            Add Pun
+          </button>
+        </div>
       </form>
     </div>
   );

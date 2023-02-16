@@ -1,10 +1,14 @@
 .form {
   width: 80vw;
-  display: grid;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+
+.form__title {
+  text-align: center;
 }
 
 .form__division {
@@ -31,9 +35,15 @@
   font-weight: bold;
 }
 
+.button__wrapper {
+  width: 80vw;
+  display: flex;
+  justify-content: right;
+}
+
 .form__button {
   width: 10vw;
-  justify-self: right;
+  float: right;
   background-color: black;
   color: white;
   font-weight: bold;
