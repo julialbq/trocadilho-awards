@@ -51,7 +51,51 @@ describe("<PunsForm />", () => {
       expect(addButton).toBeInTheDocument();
     });
   });
-  describe("should submit form when all fiealds are filled when button Add Pun is clicked", () => {
+  describe("should submit form when all fields are filled", () => {
+    it("calls the handleDate function", () => {
+      const handleDate = jest.fn();
+
+      render(<PunsForm handleDate={handleDate} />);
+
+      const dateInput = screen.getByLabelText(/date:/i);
+
+      userEvent.change(dateInput, { target: { value: "01/01/2020" } });
+
+      expect(handleDate).toBeCalled();
+    });
+    it("calls the handleDev function", () => {
+      const handleDev = jest.fn();
+
+      render(<PunsForm handleDev={handleDev} />);
+
+      const devInput = screen.getByLabelText(/dev:/i);
+
+      userEvent.type(devInput, "01/01/2020");
+
+      expect(handleDev).toBeCalled();
+    });
+    it("calls the handleContext function", () => {
+      const handleContext = jest.fn();
+
+      render(<PunsForm handleContext={handleContext} />);
+
+      const contextInput = screen.getByLabelText(/context:/i);
+
+      userEvent.type(contextInput, "context");
+
+      expect(handleContext).toBeCalled();
+    });
+    it("calls the handleMessage function", () => {
+      const handleMessage = jest.fn();
+
+      render(<PunsForm handleMessage={handleMessage} />);
+
+      const messageInput = screen.getByLabelText(/pun:/i);
+
+      userEvent.type(messageInput, "pun pun");
+
+      expect(handleMessage).toBeCalled();
+    });
     it("calls the handleSubmit function once", () => {
       const handleSubmit = jest.fn();
 
@@ -61,7 +105,7 @@ describe("<PunsForm />", () => {
 
       userEvent.click(addButton);
 
-      expect(handleSubmit).toHaveBeenCalledTimes(1)
+      expect(handleSubmit).toHaveBeenCalledTimes(1);
     });
 
     it("calls handleSubmit once with the correct input values", () => {
