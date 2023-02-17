@@ -1,21 +1,20 @@
 import "./Ranking.css";
 
 export const Ranking = ({puns}) => {
-  console.log(puns)
 
   const devs = puns.map(pun => pun.dev)
 
   const countApperances = devs.reduce((dev, pun) => {
-    console.log(dev[pun])
     dev[pun] = (dev[pun] || 0) + 1
     return dev
   },{})
 
-console.log(countApperances)
-  // Object.keys(countApperances).reduce((a, b) => countApperances[a] > countApperances[b] ? a:b)
+  const devOrder = Object.fromEntries(
+    Object.entries(countApperances).sort(([,a],[,b]) => b-a)
+);
 
-  const devOrder = Object.entries(countApperances).sort(([a], [b]) => a-b).reduce((acc, [dev, apperance]) => ({...acc, [dev]: apperance}), {})
-  console.log(devOrder)
+const devNames = Object.keys(devOrder)
+const punCount = Object.values(devOrder)
 
 
   return (
@@ -70,18 +69,18 @@ console.log(countApperances)
           <tbody>
             <tr>
               <td className="table__data table__data--place-1">1°</td>
-              <td className="table__data">20</td>
-              <td className="table__data">maria</td>
+              <td className="table__data">{punCount[0]}</td>
+              <td className="table__data">{devNames[0]}</td>
             </tr>
             <tr>
               <td className="table__data table__data--place-2">2°</td>
-              <td className="table__data">10</td>
-              <td className="table__data">joao</td>
+              <td className="table__data">{punCount[1]}</td>
+              <td className="table__data">{devNames[1]}</td>
             </tr>
             <tr>
               <td className="table__data table__data--place-3">3°</td>
-              <td className="table__data">3</td>
-              <td className="table__data">jose</td>
+              <td className="table__data">{punCount[2]}</td>
+              <td className="table__data">{devNames[2]}</td>
             </tr>
           </tbody>
         </table>
