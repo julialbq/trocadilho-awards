@@ -1,6 +1,23 @@
 import "./Ranking.css";
 
-export const Ranking = () => {
+export const Ranking = ({puns}) => {
+  console.log(puns)
+
+  const devs = puns.map(pun => pun.dev)
+
+  const countApperances = devs.reduce((dev, pun) => {
+    console.log(dev[pun])
+    dev[pun] = (dev[pun] || 0) + 1
+    return dev
+  },{})
+
+console.log(countApperances)
+  // Object.keys(countApperances).reduce((a, b) => countApperances[a] > countApperances[b] ? a:b)
+
+  const devOrder = Object.entries(countApperances).sort(([a], [b]) => a-b).reduce((acc, [dev, apperance]) => ({...acc, [dev]: apperance}), {})
+  console.log(devOrder)
+
+
   return (
     <div className="ranking__wrapper">
       <div className="puns__wrapper">

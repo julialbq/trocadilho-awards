@@ -90,7 +90,7 @@ function App() {
           handleSubmit={handleSubmit}
         />
       )}
-      {rankingPage && <Ranking />}      
+      {rankingPage && <Ranking puns={listedPuns.parsed} />}      
     </div>
   );
 }
