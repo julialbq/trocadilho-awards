@@ -1,21 +1,19 @@
 import "./Ranking.css";
 
-export const Ranking = ({puns}) => {
-
-  const devs = puns.map(pun => pun.dev)
+export const Ranking = ({ puns }) => {
+  const devs = puns.map((pun) => pun.dev);
 
   const countApperances = devs.reduce((dev, pun) => {
-    dev[pun] = (dev[pun] || 0) + 1
-    return dev
-  },{})
+    dev[pun] = (dev[pun] || 0) + 1;
+    return dev;
+  }, {});
 
   const devOrder = Object.fromEntries(
-    Object.entries(countApperances).sort(([,a],[,b]) => b-a)
-);
+    Object.entries(countApperances).sort(([, a], [, b]) => b - a)
+  );
 
-const devNames = Object.keys(devOrder)
-const punCount = Object.values(devOrder)
-
+  const devNames = Object.keys(devOrder);
+  const punCount = Object.values(devOrder);
 
   return (
     <div className="ranking__wrapper">
