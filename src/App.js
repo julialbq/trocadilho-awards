@@ -3,6 +3,7 @@ import "./App.css";
 import { Header } from "./components/Header/Header";
 import { PunsForm } from "./components/PunsForm/PunsForm";
 import { PunsList } from "./components/PunsList/PunsList";
+import { Ranking } from "./components/Ranking/Ranking";
 import { useInput } from "./hooks/useInput";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
@@ -10,6 +11,7 @@ function App() {
   const [formValues, setFormValues] = useState({});
   const [listPage, setListPage] = useState(true);
   const [addPage, setAddPage] = useState(false);
+  const [rankingPage, setRankingPage] = useState(false)
 
   const punInfo = {
     date: "",
@@ -73,7 +75,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header setListPage={setListPage} setAddPage={setAddPage} />
+      <Header setListPage={setListPage} setAddPage={setAddPage} setRankingPage={setRankingPage} />
       {listPage && <PunsList puns={listedPuns.parsed} />}
       {addPage && (
         <PunsForm
@@ -88,6 +90,7 @@ function App() {
           handleSubmit={handleSubmit}
         />
       )}
+      {rankingPage && <Ranking puns={listedPuns.parsed} />}      
     </div>
   );
 }
