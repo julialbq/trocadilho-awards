@@ -1,16 +1,60 @@
+import { useState } from "react";
+import { useInput } from "../../hooks/useInput";
 import "./PunsForm.css";
 
-export const PunsForm = ({
-  date,
-  handleDate,
-  dev,
-  handleDev,
-  context,
-  handleContext,
-  message,
-  handleMessage,
-  handleSubmit,
-}) => {
+export const PunsForm = ({ listedPuns }) => {
+  const [formValues, setFormValues] = useState({});
+
+  const {
+    value: date,
+    setValue: setDate,
+    handleInput: handleDate,
+  } = useInput(formValues.date ?? "00/00/00");
+
+  const {
+    value: dev,
+    setValue: setDev,
+    handleInput: handleDev,
+  } = useInput(formValues.dev ?? "");
+
+  const {
+    value: context,
+    setValue: setContext,
+    handleInput: handleContext,
+  } = useInput(formValues.dev ?? "");
+
+  const {
+    value: message,
+    setValue: setMessage,
+    handleInput: handleMessage,
+  } = useInput(formValues.message ?? "");
+
+  const resetInputValues = () => {
+    setDate("");
+    setContext("");
+    setDev("");
+    setMessage("");
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const elements = event.target.elements;
+
+    const newPun = {
+      date: elements.date.value,
+      dev: elements.dev.value,
+      context: elements.dev.value,
+      message: elements.pun.value,
+      votes: 0,
+    };
+
+    setFormValues(newPun);
+    listedPuns.saveValue(newPun);
+
+    resetInputValues();
+  };
+
   return (
     <div className="form__wrapper">
       <form className="form" onSubmit={handleSubmit}>
@@ -61,7 +105,7 @@ export const PunsForm = ({
             onChange={handleMessage}
           />
         </label>
-        <div className="button__wrapper">
+        <div className="form__button-wrapper">
           <button className="form__button" type="submit">
             Add Pun
           </button>
