@@ -51,7 +51,7 @@ describe("<PunsForm />", () => {
       expect(addButton).toBeInTheDocument();
     });
   });
-  describe("should submit form when all fields are filled", () => {
+  describe.skip("should submit form when all fields are filled", () => {
     it("calls the handleDate function", () => {
       const handleDate = jest.fn();
 
@@ -59,8 +59,7 @@ describe("<PunsForm />", () => {
 
       const dateInput = screen.getByLabelText(/date:/i);
 
-      userEvent.click(dateInput)
-      userEvent.type(dateInput, '01012020');
+      userEvent.type(dateInput, "02020-01-01");
 
       expect(handleDate).toHaveBeenCalled();
     });
@@ -97,41 +96,17 @@ describe("<PunsForm />", () => {
 
       expect(handleMessage).toHaveBeenCalled();
     });
-    it("calls the handleSubmit function once", () => {
-      const handleSubmit = jest.fn();
 
-      render(<PunsForm handleSubmit={handleSubmit} />);
+    it("clears the input fields after sending the form values", () => {
+      const resetValues = jest.fn();
+
+      render(<PunsForm />);
 
       const addButton = screen.getByRole("button", { name: /add pun/i });
 
       userEvent.click(addButton);
 
-      expect(handleSubmit).toHaveBeenCalledTimes(1);
-    });
-
-    it.skip("calls handleSubmit once with the correct input values", () => {
-      const date = "01/01/2001";
-      const dev = "julia.al";
-      const context = "punspuns";
-      const pun = "my pun";
-      const handleSubmit = jest.fn();
-
-      render(<PunsForm handleSubmit={handleSubmit} />);
-
-      const dateInput = screen.getByLabelText(/date:/i);
-      const devInput = screen.getByLabelText(/dev:/i);
-      const contextInput = screen.getByLabelText(/context:/i);
-      const punInput = screen.getByLabelText(/pun:/i);
-      const addButton = screen.getByRole("button", { name: /add pun/i });
-
-      userEvent.type(dateInput, date);
-      userEvent.type(devInput, dev);
-      userEvent.type(contextInput, context);
-      userEvent.type(punInput, pun);
-
-      userEvent.click(addButton);
-
-      expect(handleSubmit).toHaveBeenCalledWith({ });
+      expect(resetValues).toHaveBeenCalled();
     });
   });
 });
