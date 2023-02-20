@@ -5,50 +5,48 @@ import { Header } from "./Header";
 describe("<Header />", () => {
   describe("should render all buttons", () => {
     it("renders the List of Puns button", () => {
-      render(<Header />)
+      render(<Header />);
       const listButton = screen.getByRole("button", { name: /list of puns/i });
 
-      expect(listButton).toBeInTheDocument()
-    })
+      expect(listButton).toBeInTheDocument();
+    });
     it("renders the Add Pun button", () => {
-      render(<Header />)
+      render(<Header />);
       const addButton = screen.getByRole("button", { name: /add pun/i });
 
-      expect(addButton).toBeInTheDocument()
-    })
+      expect(addButton).toBeInTheDocument();
+    });
     it("renders the Ranking button", () => {
-      render(<Header />)
-      const rankingButton = screen.getByRole('button', {name: /ranking/i})
+      render(<Header />);
+      const rankingButton = screen.getByRole("button", { name: /ranking/i });
 
-      expect(rankingButton).toBeInTheDocument()
-    })
-  })
+      expect(rankingButton).toBeInTheDocument();
+    });
+  });
   describe("when the List of Puns button is clicked", () => {
-    it("changes states to render list of Puns", () => {
-      const setListState = jest.fn();
-      const setAddState = jest.fn();
-      render(<Header setListPage={setListState} setAddPage={setAddState} />);
+    it("calls the currentPage state", () => {
+      const setCurrentPage = jest.fn();
+
+      render(<Header setCurrentPage={setCurrentPage} />);
 
       const listButton = screen.getByRole("button", { name: /list of puns/i });
 
       userEvent.click(listButton);
 
-      expect(setListState).toBeCalled();
-      expect(setAddState).toBeCalled();
+      expect(setCurrentPage).toBeCalled();
     });
   });
   describe("when de Add Pun button is clicked", () => {
-    it('changes states to render form to add pun', () => {
-      const setListState = jest.fn();
-      const setAddState = jest.fn();
-      render(<Header setListPage={setListState} setAddPage={setAddState} />);
+    it("calls the currentPage state", () => {
+      const setCurrentPage = jest.fn();
+
+      render(<Header setCurrentPage={setCurrentPage} />);
 
       const addButton = screen.getByRole("button", { name: /add pun/i });
 
       userEvent.click(addButton);
 
-      expect(setListState).toBeCalled();
-      expect(setAddState).toBeCalled();
-    })
-  })
+      expect(setCurrentPage).toBeCalled();
+    });
+  });
 });
