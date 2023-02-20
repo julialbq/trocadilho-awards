@@ -1,6 +1,6 @@
 import "./Header.css";
 
-export const Header = ({ setListPage, setAddPage }) => {
+export const Header = ({ setCurrentPage}) => {
   return (
     <header className="header">
       <h1 className="header__title">Trocadilho Awards</h1>
@@ -8,8 +8,8 @@ export const Header = ({ setListPage, setAddPage }) => {
         <button
           className="header__button"
           onClick={() => {
-            setListPage(true);
-            setAddPage(false);
+            // 
+            setCurrentPage('ListPuns')
           }}
         >
           LIST OF PUNS
@@ -17,8 +17,9 @@ export const Header = ({ setListPage, setAddPage }) => {
         <button
           className="header__button"
           onClick={() => {
-            setListPage(false);
-            setAddPage(true);
+            // setListPage(false);
+            // setAddPage(true);
+            setCurrentPage('AddPuns')
           }}
         >
           ADD PUN

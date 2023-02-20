@@ -6,9 +6,10 @@ import { PunsList } from "./components/PunsList/PunsList";
 import { useLocalStorage } from "./hooks/useLocalStorage";
 
 function App() {
-  const [formValues, setFormValues] = useState({});
-  const [listPage, setListPage] = useState(true);
-  const [addPage, setAddPage] = useState(false);
+  const [currentPage, setCurrentPage] = useState("ListPuns");
+
+  const LIST_PUNS = "ListPuns";
+  const ADD_PUNS = "AddPuns";
 
   const punInfo = {
     date: "",
@@ -22,21 +23,9 @@ function App() {
 
   return (
     <div className="App">
-      <Header setListPage={setListPage} setAddPage={setAddPage} />
-      {listPage && <PunsList puns={listedPuns.parsed} />}
-      {addPage && (
-        <PunsForm
-          date={date}
-          handleDate={handleDate}
-          dev={dev}
-          handleDev={handleDev}
-          context={context}
-          handleContext={handleContext}
-          message={message}
-          handleMessage={handleMessage}
-          handleSubmit={handleSubmit}
-        />
-      )}
+      <Header setCurrentPage={setCurrentPage} />
+      {currentPage === LIST_PUNS && <PunsList puns={listedPuns.parsed} />}
+      {currentPage === ADD_PUNS && <PunsForm puns={listedPuns} />}
     </div>
   );
 }
