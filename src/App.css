@@ -7,14 +7,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.header__title {
-  text-align: center;
-}
-
-.header__nav {
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-}
